@@ -6,6 +6,11 @@ import RadioGroup from "@material-ui/core/RadioGroup";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 import FormControl from "@material-ui/core/FormControl";
 import FormLabel from "@material-ui/core/FormLabel";
+import DateFnsUtils from "@date-io/date-fns";
+import {
+  MuiPickersUtilsProvider,
+  KeyboardDatePicker,
+} from "@material-ui/pickers";
 
 export default function NewForm() {
   const [formInputs, formInputsHandler] = useState({
@@ -13,11 +18,17 @@ export default function NewForm() {
     internalCode: "",
     status: "",
     company: "",
-    project: true,
+    project: "true",
     reclamante: "",
     reclamada: "",
     reclamanteValue: "",
     reclamanteLiquid: "",
+    deadline: "",
+    finalDeadline: "true",
+    signupDate: "",
+    alterationDate: "",
+    deliverDate: "",
+    triagemDate: "",
   });
 
   const inputChange = (e) => {
@@ -35,6 +46,9 @@ export default function NewForm() {
             fullWidth
             margin="normal"
             name="code"
+            InputLabelProps={{
+              shrink: true,
+            }}
             onChange={(e) => inputChange(e)}
           />
         </Grid>
@@ -78,16 +92,16 @@ export default function NewForm() {
               aria-label="project"
               name="project"
               value={formInputs.project}
-              onChange={inputChange}
+              onChange={(e) => inputChange(e)}
             >
               <Grid container direction="row">
                 <FormControlLabel
-                  value={true}
+                  value={"true"}
                   control={<Radio />}
                   label="Sim"
                 />
                 <FormControlLabel
-                  value={false}
+                  value={"false"}
                   control={<Radio />}
                   label="Não"
                 />
@@ -138,6 +152,90 @@ export default function NewForm() {
             name="reclamanteLiquid"
             onChange={(e) => inputChange(e)}
           />
+        </Grid>
+        <Grid item xs={2}>
+          <MuiPickersUtilsProvider utils={DateFnsUtils}>
+            <KeyboardDatePicker
+              fullWidth
+              disableToolbar
+              variant="inline"
+              format="dd/MM/yyyy"
+              margin="normal"
+              id="date-picker-inline"
+              label="Prazo"
+              value={formInputs.date}
+              onChange={(e) => inputChange(e)}
+              InputAdornmentProps={{ position: "start" }}
+              inputVariant="outlined"
+              KeyboardButtonProps={{
+                "aria-label": "change date",
+              }}
+            />
+          </MuiPickersUtilsProvider>
+        </Grid>
+        <Grid item xs={2}>
+          <FormControl margin="normal" component="fieldset">
+            <FormLabel component="legend">Prazo final</FormLabel>
+            <RadioGroup
+              aria-label="finalDeadline"
+              name="finalDeadline"
+              value={formInputs.finalDeadline}
+              onChange={(e) => inputChange(e)}
+            >
+              <Grid container direction="row">
+                <FormControlLabel
+                  value={"true"}
+                  control={<Radio />}
+                  label="Sim"
+                />
+                <FormControlLabel
+                  value={"false"}
+                  control={<Radio />}
+                  label="Não"
+                />
+              </Grid>
+            </RadioGroup>
+          </FormControl>
+        </Grid>
+        <Grid item xs={2}>
+          <MuiPickersUtilsProvider utils={DateFnsUtils}>
+            <KeyboardDatePicker
+              fullWidth
+              disableToolbar
+              variant="inline"
+              format="dd/MM/yyyy"
+              margin="normal"
+              id="date-picker-inline"
+              label="Data cadastro"
+              value={formInputs.date}
+              onChange={(e) => inputChange(e)}
+              InputAdornmentProps={{ position: "start" }}
+              inputVariant="outlined"
+              KeyboardButtonProps={{
+                "aria-label": "change date",
+              }}
+            />
+          </MuiPickersUtilsProvider>
+        </Grid>
+        <Grid item xs={2}>
+          <MuiPickersUtilsProvider utils={DateFnsUtils}>
+            <KeyboardDatePicker
+              fullWidth
+              disableToolbar
+              variant="inline"
+              format="dd/MM/yyyy"
+              margin="normal"
+              id="date-picker-inline"
+              label="Datan"
+              value={formInputs.date}
+              onChange={(e) => inputChange(e)}
+              InputAdornmentProps={{ position: "start" }}
+              inputVariant="outlined"
+              KeyboardButtonProps={{
+                "aria-label": "change date",
+              }}
+            />
+          </MuiPickersUtilsProvider>
         </Grid>
       </Grid>
     </form>
